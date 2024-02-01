@@ -1,7 +1,11 @@
 import { useState, useEffect } from "react";
+import Modal from "./modal";
 
 function MovieData(props) {
   const [movieList, setMovieList] = useState([]);
+  const [openModal, setOpenModal] = useState(false);
+
+  const handleOnClose = () => setOpenModal(false);
   const movId = props.id.toString();
   const dataLen = props.dataLen;
   console.log(dataLen);
@@ -9,7 +13,7 @@ function MovieData(props) {
   const options = {
     method: "GET",
     headers: {
-      "X-RapidAPI-Key": "4eda211c44msh473f1cd73fc42f3p115138jsnb162b970382a",
+      "X-RapidAPI-Key": "9fe3a97c44msh54740d99fb78004p15b193jsnecf405499112",
       "X-RapidAPI-Host": "movies-api14.p.rapidapi.com",
     },
   };
@@ -26,12 +30,24 @@ function MovieData(props) {
   useEffect(() => {
     getMovie();
   }, []);
+  const title = movieList.title;
+  const ytLink = movieList.youtube_trailer;
+  const poster = movieList.poster_path;
   return (
     <div className="rounded-xl shadow-lg">
       <div className="p-5 flex flex-col justify-between">
         <div className="rounded-xl overflow-hidden">
-          <img src={`${movieList.poster_path}`} />
+          <button onClick={() => setOpenModal(true)}>
+            <img src={`${movieList.poster_path}`} />
+          </button>
         </div>
+        <Modal
+          visible={openModal}
+          onClose={handleOnClose}
+          ytLink={ytLink}
+          poster={poster}
+          title={title}
+        />
         <div className="flex pt-2">
           <span>
             <svg
@@ -52,7 +68,6 @@ function MovieData(props) {
         <h1 className="overflow-hidden text-2xl p-3 justify-center text-center">
           {movieList.title}
         </h1>
-
         <div className="rounded-md object-bottom justify-center text-center border bg-slate-300">
           {movieList.release_date}
         </div>

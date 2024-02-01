@@ -11,7 +11,7 @@ export default function Movies() {
   const options = {
     method: "GET",
     headers: {
-      "X-RapidAPI-Key": "4eda211c44msh473f1cd73fc42f3p115138jsnb162b970382a",
+      "X-RapidAPI-Key": "9fe3a97c44msh54740d99fb78004p15b193jsnecf405499112",
       "X-RapidAPI-Host": "movies-api14.p.rapidapi.com",
     },
   };
